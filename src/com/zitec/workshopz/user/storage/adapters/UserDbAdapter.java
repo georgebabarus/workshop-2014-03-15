@@ -19,6 +19,7 @@ public class UserDbAdapter extends BaseDbStorageAdapter{
 	public UserDbAdapter(Context ctx) throws NameNotFoundException {
 		super(ctx);
 		this.database = new DbHelper(ctx, null, VersionUtils.getVersionCode(ctx));
+		this.table = "users";
 	}
 	
 	@Override

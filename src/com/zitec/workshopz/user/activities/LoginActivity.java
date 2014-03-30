@@ -3,6 +3,8 @@ package com.zitec.workshopz.user.activities;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.content.DialogInterface;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.SparseArray;
 
@@ -65,7 +67,12 @@ public class LoginActivity extends BaseActivity {
 				}
 				User usr = (User) obj.get(0);
 				BaseActivity.identity = usr;
-				mapper.setAdapter(new UserDbAdapter(LoginActivity.this));
+				try {
+					mapper.setAdapter(new UserDbAdapter(LoginActivity.this));
+				} catch (NameNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				usr.setCurrentIdentity("true");
 				mapper.save(usr);
 				LoginActivity.this.loadWorkshops();
@@ -79,15 +86,37 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
 		mapper.getEntity(username, password);
+	}
+
+
+	public void register(HashMap<String, String> params, DialogInterface dialog) {
+		final UserMapper mapper = new UserMapper();
+		mapper.setAdapter(new UserWSAdapter(this));
+		mapper.setListener(new EntityResponseListener() {
+			
+			@Override
+			public void onSuccess(ArrayList<BaseEntity> obj) {
+				LoginActivity.this.showGenericError(
+						LoginActivity.this,
+						"The user was successful registered");
+
+			}
+			
+			@Override
+			public void onError(Error err) {
+				LoginActivity.this.showGenericError(
+						LoginActivity.this,
+						err);
+			}
+		});
+		mapper.registerEntity(params);		
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		dialog.cancel();
 		
 	}
+	
+	
+	
+	
+	
 }

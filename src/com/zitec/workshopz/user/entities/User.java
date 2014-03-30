@@ -55,4 +55,5 @@ public class User extends BaseEntity{
 	public void setCurrentIdentity(String currentIdentity) {
 		this.currentIdentity = currentIdentity;
 	}
+
 }

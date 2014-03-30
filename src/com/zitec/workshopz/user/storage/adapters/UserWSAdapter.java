@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.zitec.workshopz.R;
 import com.zitec.workshopz.base.storage.adapters.BaseWSStorageAdapter;
+import com.zitec.workshopz.user.entities.User;
 
 public class UserWSAdapter extends BaseWSStorageAdapter{
 
@@ -67,5 +68,38 @@ public class UserWSAdapter extends BaseWSStorageAdapter{
 		} catch (JSONException e) {
 			this.mapper.onError(this.context.getResources().getString(R.string.network_error));
 		}
+	}
+
+	public void registerEntity(HashMap<String, String> params) {
+		String url = this.getBaseUrl() + "/" + this.methodName ;
+		Log.d("Volley", url);
+		final String r_name = 			params.get("name");
+		final String r_email = 			params.get("email");
+		final String r_position = 		params.get("position");
+		final String r_password = 		params.get("password");
+		final String r_phone_number = 	params.get("phone_number");
+
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, null, this, this){
+			@Override
+		    public HashMap<String, String> getParams() {
+				HashMap<String, String> params = new HashMap<String, String>();
+				params.put("name", r_name);
+				params.put("email", r_email);
+				params.put("position", r_position);
+				params.put("password", r_password);
+				params.put("phone_number", r_phone_number);
+				return params;
+			}
+			
+			@Override
+			public HashMap<String, String> getHeaders(){
+				HashMap<String, String> params = new HashMap<String, String>();
+				//params.put("Content-Type", "application/json");
+				params.put("Accept", "application/json");
+				return params;
+			}
+		};
+		this.queue.add(req);
+			
 	}
 }

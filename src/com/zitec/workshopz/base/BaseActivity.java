@@ -36,6 +36,10 @@ public class BaseActivity extends FragmentActivity {
 		Toast tst = Toast.makeText(ctx, err.getMessage(), Toast.LENGTH_LONG);
 		tst.show();
 	}
+	public void showGenericError(Context ctx, String message){
+		Toast tst = Toast.makeText(ctx, message, Toast.LENGTH_LONG);
+		tst.show();
+	}
 	
 	public void setIdentity(User usr){
 		BaseActivity.identity = usr;

@@ -53,7 +53,8 @@ public class BaseDbStorageAdapter extends BaseStorageAdapter {
 			    data.put("id", String.valueOf(lastId));
 			}
 		}
-		this.mapper.onSuccess(data);
+		
+		//this.mapper.onSuccess(data);
 	}
 	
 	public ArrayList<HashMap<String, String>> processCursor(Cursor c){

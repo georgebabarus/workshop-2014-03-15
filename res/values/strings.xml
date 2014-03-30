@@ -24,5 +24,6 @@
     <string name="position">Position</string>
     <string name="phone_number">Phone number</string>
    	<string name="email">Email</string>
-        
+   	<string name="user_not_registered">User not registered</string>
+   	
 </resources>

@@ -98,7 +98,7 @@ public class LoginActivity extends BaseActivity {
 			public void onSuccess(ArrayList<BaseEntity> obj) {
 				LoginActivity.this.showGenericError(
 						LoginActivity.this,
-						"The user was successful registered");
+						"The user was successfully registered");
 
 			}
 			
